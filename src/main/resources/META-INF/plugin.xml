@@ -1,0 +1,69 @@
+<idea-plugin>
+    <id>com.smartcopy</id>
+    <name>Smart Copy</name>
+    <version>1.0.2</version>
+    <vendor>老吕制作</vendor>
+
+    <description><![CDATA[
+        <h2>Smart Copy</h2>
+        <p><strong>老吕制作</strong></p>
+        <p>将选中代码的文件路径和行号信息发送到 Terminal 控制台。</p>
+        
+        <h3>功能</h3>
+        <ul>
+            <li>选中代码后，右键菜单点击「Send to SmartCopy」</li>
+            <li>自动提取文件相对路径、起始行号、结束行号</li>
+            <li>发送到当前激活的 Terminal 输入框</li>
+        </ul>
+        
+        <h3>输出格式</h3>
+        <pre>relative/path/to/File.java:startLine-endLine</pre>
+        <p>例如：<code>src/main/java/com/example/MyService.java:10-25</code></p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>1.0.2</h3>
+        <ul>
+            <li>输出格式改为文件相对路径（相对于项目根目录）</li>
+            <li>支持 IDEA 2024/2025 Block Terminal（重置版终端）</li>
+        </ul>
+        <h3>1.0.1</h3>
+        <ul>
+            <li>兼容 IDEA 2020.3 至 2025.x 所有版本</li>
+            <li>支持 macOS、Windows、Linux</li>
+            <li>改进 Terminal 发送兼容性</li>
+        </ul>
+        <h3>1.0.0</h3>
+        <ul>
+            <li>初始版本发布</li>
+            <li>支持选中代码发送到 Terminal</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- 兼容 IDEA 2023.3+ 到最新版本 -->
+    <idea-version since-build="233" until-build="253.*"/>
+
+    <!-- 依赖声明 -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+    <!-- Java PSI 改为可选依赖，这样在没有 Java 插件的 IDE 中也能工作 -->
+    <depends optional="true" config-file="java-features.xml">com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- 通知组 -->
+        <notificationGroup id="SmartCopy.Notification"
+                          displayType="BALLOON"
+                          key="notification.group.smartcopy"/>
+    </extensions>
+
+    <actions>
+        <!-- 右键菜单 Action -->
+        <action id="SmartCopy.SendToTerminal"
+                class="com.smartcopy.action.SendToTerminalAction"
+                text="Send to SmartCopy"
+                description="发送选中代码的类名和行号到 Terminal">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S"/>
+        </action>
+    </actions>
+</idea-plugin>
