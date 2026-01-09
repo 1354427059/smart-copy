@@ -56,8 +56,8 @@ class SendToTerminalAction : AnAction() {
             return
         }
 
-        // 格式化信息
-        val formattedText = codeInfo.format()
+        // 格式化信息，另起一行发送
+        val formattedText = "\n" + codeInfo.format()
 
         // 发送到 Terminal
         when (val result = TerminalService.sendToTerminal(project, formattedText)) {

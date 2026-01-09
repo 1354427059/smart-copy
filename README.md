@@ -8,12 +8,13 @@
 
 ### 模式 1：发送路径和行号
 - 📋 选中代码后，右键菜单点击「Send Path and Line to Terminal」
-- 📝 自动提取文件相对路径、起始行号、结束行号
+- 📝 另起一行发送文件相对路径、起始行号、结束行号
 - ⏱️ 支持快捷键 `Ctrl+Alt+S`（Mac 上为 `Cmd+Option+S`）
 
 ### 模式 2：发送选中内容 ⭐️
 - 📝 选中代码后，右键菜单点击「Send Selection to Terminal」
-- 🖥️ 直接发送选中的代码文本内容到 Terminal
+- 🖥️ 另起一行发送选中的代码文本内容到 Terminal
+- 📁 自动添加文件路径和行号注释（# From: path/to/file:10-25）
 - ⏱️ 支持快捷键 `Ctrl+Alt+Shift+S`（Mac 上为 `Cmd+Option+Shift+S`）
 
 ### 通用特性
@@ -34,8 +35,10 @@ src/main/java/com/example/MyService.java:10-25
 ```
 
 ### 模式 2：选中内容
-直接发送你选中的代码文本，例如：
-```java
+另起一行发送，自动添加文件路径和行号注释和代码内容：
+```bash
+
+# From: src/main/java/com/example/MyService.java:10-12
 public void myMethod() {
     System.out.println("Hello World");
 }
@@ -45,7 +48,7 @@ public void myMethod() {
 
 ### 方式一：直接下载
 
-1. 下载插件包：[smart-copy-1.0.3.zip](build/distributions/smart-copy-1.0.3.zip)
+1. 下载插件包：[smart-copy-1.0.4.zip](build/distributions/smart-copy-1.0.4.zip)
 2. 在 IDEA 中：`File` → `Settings` → `Plugins` → `⚙️` → `Install Plugin from Disk...`
 3. 选择下载的 `.zip` 文件，重启 IDEA
 
@@ -68,13 +71,13 @@ cd smart-copy
 1. 在代码编辑器中选中一段代码
 2. 右键点击，选择「Send Path and Line to Terminal」
 3. 或使用快捷键 `Ctrl+Alt+S`（Mac: `Cmd+Option+S`）
-4. 文件路径和行号信息将自动发送到 Terminal
+4. 终端将另起一行，显示文件路径和行号信息
 
 ### 模式 2：发送选中内容
 1. 在代码编辑器中选中一段代码
 2. 右键点击，选择「Send Selection to Terminal」
 3. 或使用快捷键 `Ctrl+Alt+Shift+S`（Mac: `Cmd+Option+Shift+S`）
-4. 选中的代码内容将直接发送到 Terminal
+4. 终端将另起一行，显示文件路径和行号注释和选中的代码内容
 
 ## 开发环境
 
@@ -115,6 +118,10 @@ smart-copy/
 ```
 
 ## 版本历史
+
+### 1.0.4
+- 优化模式2：发送内容时另起一行，避免与终端当前内容混淆
+- 优化模式2：自动添加文件路径和行号注释（# From: path/to/file:10-25）
 
 ### 1.0.3
 - 新增发送选中内容功能（Ctrl+Alt+Shift+S）
