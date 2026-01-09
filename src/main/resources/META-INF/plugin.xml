@@ -1,27 +1,55 @@
 <idea-plugin>
     <id>com.smartcopy</id>
     <name>Smart Copy</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <vendor>老吕制作</vendor>
 
     <description><![CDATA[
-        <h2>Smart Copy</h2>
+        <h2>Smart Copy - 快速发送代码到终端</h2>
         <p><strong>老吕制作</strong></p>
-        <p>将选中代码的文件路径和行号信息发送到 Terminal 控制台。</p>
+        <p>一个强大的 IntelliJ IDEA 插件，支持两种模式将代码信息发送到 Terminal 控制台。</p>
         
-        <h3>功能</h3>
+        <h3>✨ 核心功能</h3>
+        <h4>模式 1：发送文件路径和行号</h4>
         <ul>
-            <li>选中代码后，右键菜单点击「Send to SmartCopy」</li>
-            <li>自动提取文件相对路径、起始行号、结束行号</li>
-            <li>发送到当前激活的 Terminal 输入框</li>
+            <li>📋 快捷键：<code>Ctrl+Alt+S</code>（Mac: <code>Cmd+Option+S</code>）</li>
+            <li>📝 自动提取文件相对路径、起始行号、结束行号</li>
+            <li>🎯 输出格式：<code>src/main/java/com/example/MyService.java:10-25</code></li>
+            <li>💡 适合需要记录代码位置的场景</li>
         </ul>
         
-        <h3>输出格式</h3>
-        <pre>relative/path/to/File.java:startLine-endLine</pre>
-        <p>例如：<code>src/main/java/com/example/MyService.java:10-25</code></p>
+        <h4>模式 2：发送选中代码内容 ⭐️</h4>
+        <ul>
+            <li>🚀 快捷键：<code>Ctrl+Alt+Shift+S</code>（Mac: <code>Cmd+Option+Shift+S</code>）</li>
+            <li>📄 直接发送选中的代码文本内容</li>
+            <li>⚡ 快速在终端中执行代码片段</li>
+            <li>💡 适合需要在终端运行代码的场景</li>
+        </ul>
+        
+        <h3>🔧 技术特性</h3>
+        <ul>
+            <li>✅ 自动检测终端类型（经典终端 JediTerm / 2024/2025 Block Terminal 重置版）</li>
+            <li>✅ 兼容 IDEA 2023.3+ 至 2025.x 所有版本</li>
+            <li>✅ 支持 macOS、Windows、Linux 全平台</li>
+            <li>✅ 智能回退机制：API 方式 → Robot 模拟粘贴 → 剪贴板</li>
+        </ul>
+        
+        <h3>📖 使用方法</h3>
+        <ol>
+            <li>在编辑器中选中一段代码</li>
+            <li>右键菜单选择对应功能，或使用快捷键</li>
+            <li>内容将自动发送到当前激活的 Terminal</li>
+        </ol>
+        
+        <p><em>如果无法直接发送，内容会自动复制到剪贴板供手动粘贴。</em></p>
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.0.3</h3>
+        <ul>
+            <li>新增发送选中内容功能（Ctrl+Alt+Shift+S）</li>
+            <li>两种模式：发送路径+行号 或 发送选中代码内容</li>
+        </ul>
         <h3>1.0.2</h3>
         <ul>
             <li>输出格式改为文件相对路径（相对于项目根目录）</li>
@@ -57,13 +85,22 @@
     </extensions>
 
     <actions>
-        <!-- 右键菜单 Action -->
+        <!-- 右键菜单 Action - 发送文件路径和行号 -->
         <action id="SmartCopy.SendToTerminal"
                 class="com.smartcopy.action.SendToTerminalAction"
-                text="Send to SmartCopy"
-                description="发送选中代码的类名和行号到 Terminal">
+                text="Send Path and Line to Terminal"
+                description="发送选中代码的文件路径和行号到 Terminal">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S"/>
+        </action>
+        
+        <!-- 右键菜单 Action - 发送选中的内容 -->
+        <action id="SmartCopy.SendSelectionToTerminal"
+                class="com.smartcopy.action.SendSelectionToTerminalAction"
+                text="Send Selection to Terminal"
+                description="发送选中的代码内容到 Terminal">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift S"/>
         </action>
     </actions>
 </idea-plugin>
