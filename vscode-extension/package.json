@@ -1,0 +1,83 @@
+{
+  "name": "smart-copy",
+  "displayName": "Smart Copy",
+  "description": "快速发送代码到终端 - 支持发送文件路径+行号或选中内容",
+  "version": "1.0.0",
+  "publisher": "laolv",
+  "author": "老吕制作",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "terminal",
+    "copy",
+    "send",
+    "code",
+    "path"
+  ],
+  "activationEvents": [
+    "onCommand:smartCopy.sendPathToTerminal",
+    "onCommand:smartCopy.sendSelectionToTerminal"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartCopy.sendPathToTerminal",
+        "title": "Send Path and Line to Terminal"
+      },
+      {
+        "command": "smartCopy.sendSelectionToTerminal",
+        "title": "Send Selection to Terminal"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "smartCopy.sendPathToTerminal",
+          "when": "editorHasSelection",
+          "group": "9_cutcopypaste@100"
+        },
+        {
+          "command": "smartCopy.sendSelectionToTerminal",
+          "when": "editorHasSelection",
+          "group": "9_cutcopypaste@101"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "smartCopy.sendPathToTerminal",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s",
+        "when": "editorTextFocus && editorHasSelection"
+      },
+      {
+        "command": "smartCopy.sendSelectionToTerminal",
+        "key": "ctrl+alt+shift+s",
+        "mac": "cmd+alt+shift+s",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/smart-copy"
+  },
+  "license": "MIT"
+}
