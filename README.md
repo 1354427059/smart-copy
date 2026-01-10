@@ -21,6 +21,13 @@
 - 📁 自动添加文件路径和行号注释（`# From: path/to/file:10-25`）
 - ⏱️ 快捷键：`Ctrl+Alt+Shift+S`（Mac: `Cmd+Option+Shift+S`）
 
+## 📦 插件安装包 (预打包)
+
+**项目根目录下的 `插件/` 文件夹已包含以下最新版本的安装包：**
+
+- **IntelliJ IDEA**: `插件/smart-copy.zip`
+- **VS Code**: `插件/smart-copy-1.0.0.vsix`
+
 ---
 
 ## 🧩 IntelliJ IDEA 插件
@@ -31,7 +38,7 @@
 - **终端**: 支持经典终端及 2024/2025 Block Terminal 重置版
 
 ### 安装方式
-1. **下载**: [smart-copy-1.0.4.zip](build/distributions/smart-copy-1.0.4.zip)
+1. **获取**: 直接使用根目录下 `插件/smart-copy.zip`
 2. **安装**: `File` → `Settings` → `Plugins` → `⚙️` → `Install Plugin from Disk...`
 3. **重启**: 重启 IDEA 生效
 
@@ -51,18 +58,14 @@
 
 ### 安装方式
 
-#### 方式一：本地打包安装
-1. 进入扩展目录并打包：
-   ```bash
-   cd vscode-extension
-   npm install
-   # 需要先安装 vsce: npm install -g @vscode/vsce
-   npm run package
-   ```
-2. 在 VS Code 中安装生成的 `.vsix` 文件：
+#### 方式一：直接安装 (推荐)
+1. 在 VS Code 中安装根目录下 `插件/smart-copy-1.0.0.vsix` 文件：
    - 打开扩展面板 (`Ctrl+Shift+X`)
    - 点击右上角 `...` 菜单
    - 选择 `Install from VSIX...`
+   - 选择 `插件/smart-copy-1.0.0.vsix`
+
+#### 方式二：手动打包
 
 #### 方式二：源码调试
 1. 用 VS Code 打开 `vscode-extension` 文件夹
